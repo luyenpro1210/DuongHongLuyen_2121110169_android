@@ -38,7 +38,7 @@ const Login = ( {navigation} ) => {
                             fontWeight: 'bold',
                             color: 'black',
                         }}>
-                            Login
+                            SignUp
                         </Text>
                     </View>
                     {/* body */}
@@ -90,9 +90,7 @@ const Login = ( {navigation} ) => {
                                     {/* <Image soure={require('../assets/eye.jpg')} style={{height: '30%', aspectRatio: 1}} /> */}
                                 </View>
                                 {/* forgot password */}
-                                <View style={{marginTop:10, alignItems:'flex-end'}}>
-                                    <Text style={{color: 'black'}}>Forgot password?</Text>
-                                </View>
+                                
                                 {/* login button */}
                                 <View style={{justifyContent:'center', 
                                                 alignItems:'center',
@@ -103,12 +101,9 @@ const Login = ( {navigation} ) => {
 
                                             }}>
                                         {/* <TouchableOpacity activeOpacity={0.5} onPress={onClickLogin}></TouchableOpacity> */}
-                                        {/* onPress={formSignIn} */}
-                                        <TouchableHighlight onPress={() => { 
-                                            navigation.navigate('Home')
-                                         }} > 
+                                        <TouchableHighlight onPress={formSignIn} >
                                             <View>
-                                                <Text style={{color: 'white'}}>Login</Text>
+                                                <Text style={{color: 'white'}}>SignUp</Text>
                                             </View>
                                         </TouchableHighlight>
                                 </View>
@@ -163,14 +158,7 @@ const Login = ( {navigation} ) => {
                         </View>
                     </View>
                     {/* footer */}
-                    <View style={{flex:2, justifyContent:'center', alignItems:'center'}}>
-                        <Text>Or Sign Up Using</Text>
-
-                        {/* buttonSignUp */}
-                        <TouchableOpacity style={{padding:20,}}>
-                            <Text style={{color: 'black', fontWeight: '500'}}>SIGN UP</Text>
-                        </TouchableOpacity>
-                    </View>
+                    
 
                 </View>
             </View>

@@ -6,7 +6,6 @@ const Header = () => {
         <View style={styles.header}>
             <Text style={{color:'#dc143c',fontSize:20}}>Product Lipstick</Text>
             <Image source={require('../assets/logo.jpg')}/>
-            
         </View>
     );
 };
