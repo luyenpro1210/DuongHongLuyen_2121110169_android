@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const Body = () => {
   const [products, setProducts] = useState([]);
-
+  const navigation = useNavigation();
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -18,10 +19,13 @@ const Body = () => {
     fetchProducts();
   }, []);
 
+  const navigateToProductDetail = (productId) => {
+    navigation.navigate('ProductDetail', { productId });
+  };
   return (
     <ScrollView style={styles.body}>
       {products.map((product) => (
-        <TouchableOpacity key={product.id} style={styles.item}>
+        <TouchableOpacity key={product.id} style={styles.item} onPress={() =>navigateToProductDetail(product.id)}>
           <Image source={{ uri: product.image }} style={{ width: 100, height: 100 }} />
           <View style={{flex:1}}>
             <Text style={{fontSize:12, fontWeight: 'bold'}}>  {product.title}  </Text>
