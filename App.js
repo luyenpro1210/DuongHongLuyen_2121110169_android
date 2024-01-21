@@ -7,6 +7,9 @@ import Footer from './component/Footer';
 import Home from './component/Home';
 import SignUp from './component/SignUp';
 import User from './component/User';
+import Cart from './component/Cart';
+import ProductListByCategory from './component/ProductListByCategory';
+import { CartContext, CartProvider } from './component/CartContext'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ProductDetail from './component/ProductDetail';
@@ -16,29 +19,21 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    // <View style={{flex:1}}>
-    //   {/* <View style={{flex: 40}}>
-    //     <Login/>
-    //   </View> */}
-
-    //   {/* <View style={{flex:1}}>
-    //     <SignUp/>
-    //   </View> */}
-
-    //   <View style={{flex:1}}>
-    //     <Home/>
-    //   </View>
-
-    // </View>
     <NavigationContainer>
+      <CartProvider>
         <Stack.Navigator initialRouteName="Login" screenOptions={{headerShown: false}}>
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="Home" component={Home} />
             <Stack.Screen name="SignUp" component={SignUp} />
             <Stack.Screen name="User" component={User} />
+            <Stack.Screen name="Body" component={Body} />
+            <Stack.Screen name="Cart" component={Cart} />
+            <Stack.Screen name="CartContext" component={CartContext} />
             <Stack.Screen name="ProductDetail" component={ProductDetail} />
+            <Stack.Screen name="ProductListByCategory" component={ProductListByCategory} />
         </Stack.Navigator>
-        </NavigationContainer>
+      </CartProvider>
+    </NavigationContainer>
   );
 }
 

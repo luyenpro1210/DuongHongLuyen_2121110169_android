@@ -12,7 +12,7 @@ const Home = () => {
                 <Header/>
             </View>
 
-            <View style={{flex: 40}}>
+            <View style={{flex: 80}}>
                 <Body/>
             </View>
 

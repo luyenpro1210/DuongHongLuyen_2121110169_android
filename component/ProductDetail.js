@@ -1,15 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import axios from 'axios';
-import { useNavigation } from '@react-navigation/native'; // Import hook điều hướng
+import { useNavigation } from '@react-navigation/native';
+import { CartContext } from './CartContext';
 
 export default function ProductDetail({ route }) {
   const { productId } = route.params;
   const [product, setProduct] = useState(null);
+  const { addToCart } = useContext(CartContext);
+  const navigation = useNavigation();
+  const [isPurchased, setIsPurchased] = useState(false);
+  const handleAddToCart = () => {
+    addToCart(product);
+    alert(`Added ${product.title} to Cart`);
+  };
+  const handleBuyNow = () => {
+    setIsPurchased(true);
+    // Điều hướng sang trang Order khi mua hàng thành công
+    navigation.navigate('Order', { product });
+  };
 
-  const navigation = useNavigation(); // Sử dụng hook navigation
-  const [isPurchased, setIsPurchased] = useState(false); // Trạng thái mua hàng
-  
   useEffect(() => {
     const fetchProductDetails = async () => {
       try {
@@ -33,11 +43,11 @@ export default function ProductDetail({ route }) {
             <Text style={styles.price}>Price: ${product.price}</Text>
           </View>
 
-          {/* Add to Cart button */}
-          {/* <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>Add to Cart</Text>
-          </TouchableOpacity> */}
-
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity onPress={handleAddToCart} style={[styles.button, { marginRight: 10 }]}>
+              <Text style={styles.buttonText}>Add to Cart</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       ) : (
         <Text>Loading...</Text>
@@ -47,17 +57,18 @@ export default function ProductDetail({ route }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: 30,
-    paddingHorizontal: 20,
+  buttonContainer: {
+    flexDirection: 'row',
+    marginTop: 15,
+    marginLeft: 155,
   },
   image: {
-    width: 100,
-    height: 100,
+    width: 150,
+    height: 150,
     resizeMode: 'cover',
     marginBottom: 10,
-    marginLeft: 120,
+    marginLeft: 130,
+    marginTop: 50,
   },
   productInfo: {
     alignItems: 'center',
@@ -92,5 +103,4 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 16,
   },
-  // Add more styles as needed
 });
